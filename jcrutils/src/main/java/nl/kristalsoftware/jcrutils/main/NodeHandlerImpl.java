@@ -1,6 +1,6 @@
-package nl.kristalsoftware.kristalweb.page;
+package nl.kristalsoftware.jcrutils.main;
 
-import nl.kristalsoftware.kristalweb.exception.AppRepositoryException;
+import nl.kristalsoftware.jcrutils.exception.AppRepositoryException;
 
 import javax.inject.Inject;
 import javax.jcr.*;
@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 /**
  * Created by sjoerdadema on 22-05-15.
  */
-public class PageNodeHandlerImpl implements PageNodeHandler {
+public class NodeHandlerImpl implements NodeHandler {
 
     @Inject
     private Logger logger;
@@ -18,7 +18,7 @@ public class PageNodeHandlerImpl implements PageNodeHandler {
     @Inject
     private Session session;
 
-    public PageNodeHandlerImpl() {}
+    public NodeHandlerImpl() {}
 
     @Override
     public boolean nodeExists(String path) {

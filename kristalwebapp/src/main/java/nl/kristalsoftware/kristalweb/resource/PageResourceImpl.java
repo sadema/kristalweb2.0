@@ -1,6 +1,6 @@
 package nl.kristalsoftware.kristalweb.resource;
 
-import nl.kristalsoftware.kristalweb.exception.AppRepositoryException;
+import nl.kristalsoftware.jcrutils.exception.AppRepositoryException;
 import nl.kristalsoftware.kristalweb.page.PageContentHandler;
 import nl.kristalsoftware.kristalweb.resourcedata.PageData;
 

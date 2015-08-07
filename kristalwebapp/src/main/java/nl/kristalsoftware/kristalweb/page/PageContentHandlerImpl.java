@@ -1,6 +1,7 @@
 package nl.kristalsoftware.kristalweb.page;
 
-import nl.kristalsoftware.kristalweb.exception.AppRepositoryException;
+import nl.kristalsoftware.jcrutils.exception.AppRepositoryException;
+import nl.kristalsoftware.jcrutils.main.NodeHandler;
 
 import javax.inject.Inject;
 import javax.jcr.ItemExistsException;
@@ -17,7 +18,7 @@ public class PageContentHandlerImpl implements PageContentHandler {
     private Logger log;
 
     @Inject
-    private PageNodeHandler pageNodeHandler;
+    private NodeHandler pageNodeHandler;
 
     public PageContentHandlerImpl() {}
 

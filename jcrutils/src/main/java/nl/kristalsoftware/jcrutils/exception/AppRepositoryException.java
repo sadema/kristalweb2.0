@@ -1,4 +1,4 @@
-package nl.kristalsoftware.kristalweb.exception;
+package nl.kristalsoftware.jcrutils.exception;
 
 /**
  * Created by sjoerdadema on 11-07-15.

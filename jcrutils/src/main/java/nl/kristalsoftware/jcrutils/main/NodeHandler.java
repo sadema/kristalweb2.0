@@ -1,6 +1,6 @@
-package nl.kristalsoftware.kristalweb.page;
+package nl.kristalsoftware.jcrutils.main;
 
-import nl.kristalsoftware.kristalweb.exception.AppRepositoryException;
+import nl.kristalsoftware.jcrutils.exception.AppRepositoryException;
 
 import javax.jcr.ItemExistsException;
 import javax.jcr.PathNotFoundException;
@@ -9,7 +9,7 @@ import javax.jcr.RepositoryException;
 /**
  * Created by sjoerdadema on 22-05-15.
  */
-public interface PageNodeHandler {
+public interface NodeHandler {
 
     boolean nodeExists(String path);
 

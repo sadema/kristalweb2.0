@@ -10,6 +10,7 @@
         <module>kristalwebapp</module>
         <module>kristalcms</module>
         <module>bean-refection</module>
+	<module>jcrutils</module>
     </modules>
 
     <repositories>

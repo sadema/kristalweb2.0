@@ -1,6 +1,6 @@
 package nl.kristalsoftware.kristalweb.page;
 
-import nl.kristalsoftware.kristalweb.exception.AppRepositoryException;
+import nl.kristalsoftware.jcrutils.exception.AppRepositoryException;
 
 import javax.jcr.ItemExistsException;
 import javax.jcr.PathNotFoundException;
