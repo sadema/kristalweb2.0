@@ -47,4 +47,16 @@ public class PageResourceImpl implements PageResource {
         }
         return response;
     }
+
+    @Override
+    public void removePage(String pageId, UriInfo uriInfo) {
+        String path = uriInfo.getPath();
+        try {
+            if (!pageContentHandler.removePage(path)) {
+                throw new WebApplicationException(Response.Status.SERVICE_UNAVAILABLE);
+            }
+        } catch (PathNotFoundException e) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+    }
 }

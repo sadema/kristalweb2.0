@@ -32,6 +32,16 @@ public class NodeHandlerImpl implements NodeHandler {
     }
 
     @Override
+    public String getPage(String path) throws RepositoryException {
+        String content = null;
+        Node pageNode = session.getNode(path);
+        Node contentNode = pageNode.getNode("jcr:content");
+        Property dataProperty = contentNode.getProperty("jcr:data");
+        content = dataProperty.getString();
+        return content;
+    }
+
+    @Override
     public String createFileNode(String parentNodePath, String id, String content) throws PathNotFoundException, ItemExistsException, AppRepositoryException {
         String newPagePath = null;
         try {
@@ -58,12 +68,34 @@ public class NodeHandlerImpl implements NodeHandler {
     }
 
     @Override
-    public String getPage(String path) throws RepositoryException {
-        String content = null;
-        Node pageNode = session.getNode(path);
-        Node contentNode = pageNode.getNode("jcr:content");
-        Property dataProperty = contentNode.getProperty("jcr:data");
-        content = dataProperty.getString();
-        return content;
+    public boolean removeFileNode(String nodePath) throws PathNotFoundException {
+        boolean success = true;
+        try {
+            session.removeItem(nodePath);
+            session.save();
+        } catch (RepositoryException e) {
+            success = false;
+            logger.severe(e.getMessage());
+        }
+        return success;
+    }
+
+    @Override
+    public boolean updateFileNode(String nodePath, String content) throws PathNotFoundException {
+        boolean success = true;
+        try {
+            Node node = session.getNode(nodePath);
+            if (node.isNodeType("nt:file")) {
+
+            }
+            else {
+                success = false;
+                logger.severe("Node is not of type: nt:file");
+            }
+        } catch (RepositoryException e) {
+            success = false;
+            logger.severe(e.getMessage());
+        }
+        return success;
     }
 }

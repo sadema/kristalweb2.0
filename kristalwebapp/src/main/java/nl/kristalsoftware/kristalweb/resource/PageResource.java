@@ -17,4 +17,9 @@ public interface PageResource {
 
     @POST
     Response createPage(PageData data, @Context UriInfo uriInfo);
+
+    @DELETE
+    @Path("{pageId}")
+    void removePage(@PathParam("pageId") String pageId, @Context UriInfo uriInfo);
+
 }

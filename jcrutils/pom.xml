@@ -9,6 +9,8 @@
     <artifactId>jcrutils</artifactId>
 
     <packaging>jar</packaging>
+
+    <!--
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -34,17 +36,19 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+    -->
+
     <dependencies>
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
-            <version>7.0</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.jcr</groupId>
             <artifactId>jcr</artifactId>
         </dependency>
+
+        <!--
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
@@ -74,6 +78,8 @@
             <version>1.2.16</version>
             <scope>test</scope>
         </dependency>
+        -->
+
         <!--
         <dependency>
             <groupId>org.jboss.arquillian.container</groupId>
@@ -83,12 +89,14 @@
         </dependency>
         -->
     </dependencies>
+
     <build>
         <finalName>jcrutils</finalName>
     </build>
 
     <profiles>
         <!-- embedded profiles -->
+        <!--
         <profile>
             <id>weld-ee-embedded-11</id>
             <activation>
@@ -108,5 +116,6 @@
                 </dependency>
             </dependencies>
         </profile>
+        -->
     </profiles>
 </project>

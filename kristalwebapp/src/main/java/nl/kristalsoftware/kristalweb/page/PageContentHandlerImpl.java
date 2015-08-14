@@ -36,13 +36,6 @@ public class PageContentHandlerImpl implements PageContentHandler {
             log.info("Node path not found: " + nodePath);
         }
         return page;
-/*
-        StringBuilder page = new StringBuilder("<html><head><title>KristalCMS</title></head><body>");
-        page.append("<h1>Hello ").append(customerName).append("</h1>");
-        page.append("<p>").append(nodePath).append("</p>");
-        page.append("</body></html>");
-        return page;
-*/
     }
 
     @Override
@@ -58,6 +51,18 @@ public class PageContentHandlerImpl implements PageContentHandler {
             throw new ItemExistsException();
         }
         return pageNodeHandler.createFileNode(pageNodePath, id, content);
+    }
+
+    @Override
+    public boolean removePage(String nodePath) throws PathNotFoundException {
+        boolean success = false;
+        if (pageNodeHandler.nodeExists(nodePath)) {
+            success = pageNodeHandler.removeFileNode(nodePath);
+        }
+        else {
+            throw new PathNotFoundException(nodePath + " not found");
+        }
+        return success;
     }
 
 }

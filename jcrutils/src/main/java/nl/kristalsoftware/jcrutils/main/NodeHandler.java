@@ -17,4 +17,7 @@ public interface NodeHandler {
 
     String getPage(String path) throws RepositoryException;
 
+    boolean removeFileNode(String nodePath) throws PathNotFoundException;
+
+    boolean updateFileNode(String nodePath, String content) throws PathNotFoundException;
 }
