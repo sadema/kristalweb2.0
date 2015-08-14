@@ -54,13 +54,25 @@ public class PageContentHandlerImpl implements PageContentHandler {
     }
 
     @Override
-    public boolean removePage(String nodePath) throws PathNotFoundException {
+    public boolean updatePage(String pageNodePath, String content) throws PathNotFoundException {
         boolean success = false;
-        if (pageNodeHandler.nodeExists(nodePath)) {
-            success = pageNodeHandler.removeFileNode(nodePath);
+        if (this.pageExists(pageNodePath)) {
+            success = pageNodeHandler.updateFileNode(pageNodePath, content);
         }
         else {
-            throw new PathNotFoundException(nodePath + " not found");
+            throw new PathNotFoundException(pageNodePath + " not found");
+        }
+        return success;
+    }
+
+    @Override
+    public boolean removePage(String pageNodePath) throws PathNotFoundException {
+        boolean success = false;
+        if (pageNodeHandler.nodeExists(pageNodePath)) {
+            success = pageNodeHandler.removeFileNode(pageNodePath);
+        }
+        else {
+            throw new PathNotFoundException(pageNodePath + " not found");
         }
         return success;
     }

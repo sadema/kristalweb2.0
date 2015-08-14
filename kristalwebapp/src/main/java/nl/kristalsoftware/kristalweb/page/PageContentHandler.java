@@ -11,12 +11,14 @@ import javax.jcr.RepositoryException;
  */
 public interface PageContentHandler {
 
-    public String getPage(String contextPath, String customerName, String nodePath);
+    String getPage(String contextPath, String customerName, String nodePath);
 
-    public boolean pageExists(String nodePath);
+    boolean pageExists(String nodePath);
 
-    public String createPage(String pageNodePath, String id, String content) throws PathNotFoundException, AppRepositoryException, ItemExistsException;
+    String createPage(String pageNodePath, String id, String content) throws PathNotFoundException, AppRepositoryException, ItemExistsException;
 
-    public boolean removePage(String nodePath) throws PathNotFoundException;
+    boolean updatePage(String pageNodePath, String content) throws PathNotFoundException;
+
+    boolean removePage(String nodePath) throws PathNotFoundException;
 
 }

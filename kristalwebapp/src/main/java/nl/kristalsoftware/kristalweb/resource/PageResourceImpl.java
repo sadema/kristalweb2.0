@@ -59,4 +59,16 @@ public class PageResourceImpl implements PageResource {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
     }
+
+    @Override
+    public void updatePage(String pageId, PageData pageData, UriInfo uriInfo) {
+        String path = uriInfo.getPath();
+        try {
+            if (!pageContentHandler.updatePage(path, pageData.getPageContent())) {
+                throw new WebApplicationException(Response.Status.SERVICE_UNAVAILABLE);
+            }
+        } catch (PathNotFoundException e) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+    }
 }

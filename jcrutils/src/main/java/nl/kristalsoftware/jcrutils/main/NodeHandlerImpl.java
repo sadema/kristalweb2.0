@@ -84,9 +84,13 @@ public class NodeHandlerImpl implements NodeHandler {
     public boolean updateFileNode(String nodePath, String content) throws PathNotFoundException {
         boolean success = true;
         try {
-            Node node = session.getNode(nodePath);
-            if (node.isNodeType("nt:file")) {
-
+            Node pageNode = session.getNode(nodePath);
+            if (pageNode.isNodeType("nt:file")) {
+                ByteArrayInputStream is = new ByteArrayInputStream(content.getBytes());
+                Binary binaryData = session.getValueFactory().createBinary(is);
+                Node contentNode = pageNode.getNode("jcr:content");
+                contentNode.setProperty("jcr:data", binaryData);
+                session.save();
             }
             else {
                 success = false;
