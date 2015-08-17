@@ -11,7 +11,7 @@ import javax.ws.rs.core.UriInfo;
 /**
  * Created by sjoerdadema on 11-06-15.
  */
-public class CustomerResource implements ICustomerResource {
+public class CustomerResourceImpl implements ICustomerResource {
 
     @Inject
     private Session session;

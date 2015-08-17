@@ -4,7 +4,9 @@ import nl.kristalsoftware.jcrutils.exception.AppRepositoryException;
 
 import javax.inject.Inject;
 import javax.jcr.*;
+import javax.servlet.jsp.tagext.PageData;
 import java.io.ByteArrayInputStream;
+import java.util.Collection;
 import java.util.logging.Logger;
 
 /**
@@ -32,13 +34,25 @@ public class NodeHandlerImpl implements NodeHandler {
     }
 
     @Override
-    public String getPage(String path) throws RepositoryException {
+    public String getPageContent(String path) throws RepositoryException {
         String content = null;
         Node pageNode = session.getNode(path);
         Node contentNode = pageNode.getNode("jcr:content");
         Property dataProperty = contentNode.getProperty("jcr:data");
         content = dataProperty.getString();
         return content;
+    }
+
+    @Override
+    public NodeIterator getPageIterator(String collectionPath) throws AppRepositoryException {
+        NodeIterator nodeIter = null;
+        try {
+            Node pageCollectionNode = session.getNode(collectionPath);
+            nodeIter = pageCollectionNode.getNodes();
+        } catch (RepositoryException e) {
+            throw new AppRepositoryException(e.getMessage(), e);
+        }
+        return nodeIter;
     }
 
     @Override

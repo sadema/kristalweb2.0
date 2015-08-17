@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Logger;
@@ -53,7 +54,12 @@ public class PageServlet extends HttpServlet {
             name = name.substring(0, pos);
         }
         logger.info("customerName: " + name);
-        out.append(pageContentHandler.getPage(contextPath, name, nodePath));
+        if (pageContentHandler.pageExists(nodePath) == false) {
+            response.setStatus(Response.Status.NOT_FOUND.getStatusCode());
+        }
+        else {
+            out.append(pageContentHandler.getPage(contextPath, name, nodePath));
+        }
         //String name = uri.substring(uri.lastIndexOf("site/"));
         //out.append("<html>");
         //out.append("<head><title>KristalCMS</title></head>");

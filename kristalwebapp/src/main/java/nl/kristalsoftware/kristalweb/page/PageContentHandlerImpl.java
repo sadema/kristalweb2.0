@@ -27,7 +27,7 @@ public class PageContentHandlerImpl implements PageContentHandler {
         String page = "";
         if (pageNodeHandler.nodeExists(nodePath)) {
             try {
-                page = pageNodeHandler.getPage(nodePath);
+                page = pageNodeHandler.getPageContent(nodePath);
             } catch (RepositoryException e) {
                 log.info("Node path not found: " + nodePath);
             }

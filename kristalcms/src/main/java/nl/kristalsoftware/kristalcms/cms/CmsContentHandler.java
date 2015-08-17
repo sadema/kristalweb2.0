@@ -1,6 +1,7 @@
 package nl.kristalsoftware.kristalcms.cms;
 
 import nl.kristalsoftware.jcrutils.exception.AppRepositoryException;
+import nl.kristalsoftware.kristalcms.resourcedata.PageCollectionData;
 
 import javax.jcr.ItemExistsException;
 import javax.jcr.PathNotFoundException;
@@ -10,10 +11,12 @@ import javax.jcr.PathNotFoundException;
  */
 public interface CmsContentHandler {
 
-    public String getPage(String contextPath, String customerName, String nodePath);
+    PageCollectionData getPageCollection(String nodePath) throws PathNotFoundException, AppRepositoryException;
 
-    public boolean pageExists(String nodePath);
+    String getPage(String nodePath) throws PathNotFoundException;
 
-    public String createPage(String parentNodePath, String id, String content) throws PathNotFoundException, AppRepositoryException, ItemExistsException;
+    boolean pageExists(String nodePath);
+
+    String createPage(String parentNodePath, String id, String content) throws PathNotFoundException, AppRepositoryException, ItemExistsException;
 
 }

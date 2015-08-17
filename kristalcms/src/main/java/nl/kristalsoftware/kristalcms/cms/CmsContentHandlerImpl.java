@@ -2,11 +2,11 @@ package nl.kristalsoftware.kristalcms.cms;
 
 import nl.kristalsoftware.jcrutils.exception.AppRepositoryException;
 import nl.kristalsoftware.jcrutils.main.NodeHandler;
+import nl.kristalsoftware.kristalcms.resourcedata.PageCollectionData;
+import nl.kristalsoftware.kristalcms.resourcedata.PageData;
 
 import javax.inject.Inject;
-import javax.jcr.ItemExistsException;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.RepositoryException;
+import javax.jcr.*;
 import java.util.logging.Logger;
 
 /**
@@ -23,26 +23,41 @@ public class CmsContentHandlerImpl implements CmsContentHandler {
     public CmsContentHandlerImpl() {}
 
     @Override
-    public String getPage(String contextPath, String customerName, String nodePath) {
-        String page = "";
+    public PageCollectionData getPageCollection(String nodePath) throws PathNotFoundException, AppRepositoryException {
+        PageCollectionData pageCollectionData = new PageCollectionData();
         if (pageNodeHandler.nodeExists(nodePath)) {
-            try {
-                page = pageNodeHandler.getPage(nodePath);
-            } catch (RepositoryException e) {
-                log.info("Node path not found: " + nodePath);
+            NodeIterator nodeIter = pageNodeHandler.getPageIterator(nodePath);
+            while(nodeIter.hasNext()) {
+                Node pageNode = nodeIter.nextNode();
+                PageData pageData = new PageData();
+                try {
+                    pageData.setNodename(pageNode.getName());
+                    pageCollectionData.getPageCollection().add(pageData);
+                } catch (RepositoryException e) {
+                    throw new AppRepositoryException(e.getMessage(), e);
+                }
             }
         }
         else {
-            log.info("Node path not found: " + nodePath);
+            throw new PathNotFoundException("Node path not found: " + nodePath);
+        }
+        return pageCollectionData;
+    }
+
+    @Override
+    public String getPage(String nodePath) throws PathNotFoundException {
+        String page = "";
+        if (pageNodeHandler.nodeExists(nodePath)) {
+            try {
+                page = pageNodeHandler.getPageContent(nodePath);
+            } catch (RepositoryException e) {
+                log.severe(e.getMessage());
+            }
+        }
+        else {
+            throw new PathNotFoundException("Node path not found: " + nodePath);
         }
         return page;
-/*
-        StringBuilder page = new StringBuilder("<html><head><title>KristalCMS</title></head><body>");
-        page.append("<h1>Hello ").append(customerName).append("</h1>");
-        page.append("<p>").append(nodePath).append("</p>");
-        page.append("</body></html>");
-        return page;
-*/
     }
 
     @Override
